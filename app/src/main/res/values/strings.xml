@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Flixster</string>
+    <string name="poster_desc">Movie Poster</string>
+    <string name="backdrop_desc">Movie Backdrop</string>
 </resources>

@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -67,7 +69,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             } else {
                 imagePath = movie.getPosterPath();
             }
-            Glide.with(context).load(imagePath).into(ivPoster);
+
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder);
+
+            Glide.with(context).load(imagePath).apply(options).into(ivPoster);
         }
     }
 }
