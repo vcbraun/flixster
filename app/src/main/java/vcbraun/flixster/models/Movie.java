@@ -3,24 +3,33 @@ package vcbraun.flixster.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel
 public class Movie {
-    private String imageURL;
-    private String posterSize;
-    private String posterPath;
-    private String backdropSize;
-    private String backdropPath;
-    private String title;
-    private String overview;
+    String imageURL;
+    String posterSize;
+    String posterPath;
+    String backdropSize;
+    String backdropPath;
+    String title;
+    String overview;
+
+    double rating;
+    int id;
+    // needed by Parceler library
+    public Movie() {}
 
     public Movie(JSONObject jsonObject, String imageURL, String posterSize, String backdropSize) throws JSONException {
         this.imageURL = imageURL;
         this.posterSize = posterSize;
         this.backdropSize = backdropSize;
 
+        id = jsonObject.getInt("id");
+        rating = jsonObject.getDouble("vote_average");
         posterPath = jsonObject.getString("poster_path");
         backdropPath = jsonObject.getString("backdrop_path");
         title = jsonObject.getString("title");
@@ -43,6 +52,10 @@ public class Movie {
     public String getPosterPath() {
         return String.format("%s%s%s", imageURL, posterSize, posterPath);
     }
+
+    public int getId() { return id; }
+
+    public double getRating() { return rating; }
 
     public String getTitle() {
         return title;

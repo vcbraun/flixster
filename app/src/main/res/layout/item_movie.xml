@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:id="@+id/card"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp">
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/cardview_dark_background"
+    card_view:cardElevation="6dp"
+    card_view:cardCornerRadius="4dp">
 
-    <ImageView
-        android:id="@+id/ivPoster"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/poster_desc"
-        android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars[6]" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/ivPoster"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:text="Joker" />
+        <ImageView
+            android:id="@+id/ivPoster"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/poster_desc"
+            android:scaleType="fitCenter"
+            tools:srcCompat="@tools:sample/avatars[6]" />
 
-    <TextView
-        android:id="@+id/tvDescription"
-        android:layout_width="291dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/ivPoster"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        tools:text="During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure." />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/ivPoster"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:text="Joker" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTitle"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@+id/ivPoster"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="During the 1980s, a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure." />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

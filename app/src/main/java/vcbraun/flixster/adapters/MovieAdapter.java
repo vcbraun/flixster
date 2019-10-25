@@ -1,28 +1,37 @@
 package vcbraun.flixster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
 import java.util.List;
 
+import vcbraun.flixster.DetailActivity;
 import vcbraun.flixster.R;
 import vcbraun.flixster.models.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
-    Context context;
-    List<Movie> movies;
+    private Context context;
+    private List<Movie> movies;
 
     public MovieAdapter(Context context, List<Movie> movies) {
         this.context = context;
@@ -48,9 +57,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout container;
         TextView tvTitle;
         TextView tvDescription;
         ImageView ivPoster;
+        CardView card;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,9 +69,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            card = itemView.findViewById(R.id.card);
         }
 
-        public void bind(Movie movie) {
+        public void bind(final Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvDescription.setText(movie.getOverview());
             String imagePath;
@@ -75,6 +87,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                     .error(R.drawable.placeholder);
 
             Glide.with(context).load(imagePath).apply(options).into(ivPoster);
+
+            // Make it so that clicking on a row opens a detail view
+           card.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent i = new Intent(context, DetailActivity.class);
+                   i.putExtra("movie", Parcels.wrap(movie));
+                   context.startActivity(i);
+               }
+           });
         }
     }
 }
